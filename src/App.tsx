@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import React from "react";
 import "./App.css";
+import FuncionarioForm from "./containers/Funcionario/FuncionarioForm";
 
 const theme = createMuiTheme({
   palette: {
@@ -25,7 +26,7 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/funcionario">
-              {" "}
+              <FuncionarioForm />
             </Route>
             <Route path="/funcionario/:id"> </Route>
 

@@ -1,8 +1,7 @@
-import React from 'react'
 import { Field } from 'react-final-form'
 import {TextField as TextInput, Typography} from '@material-ui/core'
 
-function TextFieldCore(props) {
+function TextFieldCore(props: any) {
     const input = props.input;
     const label = props.label;
     const meta = props.meta;
@@ -25,7 +24,7 @@ function TextFieldCore(props) {
     </>
 }
 
-function TextField(props){
+function TextField(props: any){
     return <Field name={props.name} label={props.label} component={TextFieldCore}/>
 }
 

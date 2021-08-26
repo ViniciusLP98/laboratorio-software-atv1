@@ -3,8 +3,9 @@ import { Autocomplete } from '@material-ui/lab';
 import { TextField } from '@material-ui/core';
 import { Field } from 'react-final-form';
 
-function AutoCompleteCore(props: any) {
+function AutocompleteCore(props: any) {
   const { input, options } = props;
+
   function getOption(value: string) {
     return options.find((option: any) => option === value) || null;
   }
@@ -12,7 +13,7 @@ function AutoCompleteCore(props: any) {
   return (
     <Autocomplete
       options={options}
-      value={getOption(input.value)}
+      value={getOption(input.value.id)}
       clearText="Limpar"
       openText="Abrir"
       closeText="Fechar"
@@ -23,10 +24,10 @@ function AutoCompleteCore(props: any) {
   );
 }
 
-function AutoCompleteField(props: any) {
+function AutocompleteField(props: any) {
   const { name, label, options } = props;
 
-  return <Field name={name} label={label} options={options} component={AutoCompleteCore} />;
+  return <Field name={name} label={label} options={options} component={AutocompleteCore} />;
 }
 
-export default AutoCompleteField;
+export default AutocompleteField;
