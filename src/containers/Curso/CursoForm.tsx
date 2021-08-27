@@ -42,13 +42,7 @@ const CursoForm = () => {
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <TextField name="nome" label="Nome" />
-            </Grid>
-            <Grid item xs={12}>
-              <NumericField name="codigo" label="Código" /> 
-            </Grid>
-            <Grid item xs={12}>
-              <NumericField name="ano" label="Ano do Curso" />
+              <TextField name="nomeCurso" label="Nome" />
             </Grid>
             <Grid item xs={12}>
               <Grid container justify="flex-end" spacing={2}>
