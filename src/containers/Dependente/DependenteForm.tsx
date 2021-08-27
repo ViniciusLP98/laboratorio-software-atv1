@@ -8,33 +8,33 @@ import NumericField from "../../components/NumericField";
 import TextField from "../../components/TextField";
 import api from "../../services/api";
 
-const initialValue = { nome: "", codigo: "", funcionario: {} };
+const initialValue = { nomeDependente: "", idFuncionario: {} };
 
 const DependenteForm = () => {
   const id = useParams();
-  const [optionsFuncionario, setOptionsFuncionario] = useState({});
+  const [optionsFuncionario, setOptionsFuncionario] = useState([]);
   const [values, setValues] = useState(initialValue);
 
-  // const options = [
-  //   {
-  //     nome: 'teste 1',
-  //     id: 1
-  //   },
-  //   {
-  //     nome: 'teste 2',
-  //     id: 2
-  //   },
-  //   {
-  //     nome: 'teste 3',
-  //     id: 3
-  //   }
-  // ]
+  const options = [
+    {
+      nome: 'teste 1',
+      id: 1
+    },
+    {
+      nome: 'teste 2',
+      id: 2
+    },
+    {
+      nome: 'teste 3',
+      id: 3
+    }
+  ]
 
-  useEffect(() => {
-    api.getFuncionarios().then((res: any) => {
-      setOptionsFuncionario(res);
-    });
-  }, [optionsFuncionario]);
+  // useEffect(() => {
+  //   api.getFuncionarios().then((res: any) => {
+  //     setOptionsFuncionario(res.dados);
+  //   });
+  // }, []);
 
   // useEffect(() => {
   //     if (id != "new") {
@@ -47,13 +47,12 @@ const DependenteForm = () => {
 
   const handleSubmit = (formValues: any) => {
     const submitValues = {
-      nome: formValues.nome,
-      codigo: formValues.codigo,
-      id: formValues.funcionario.id,
+      nomeDependente: formValues.nomeDependente,
+      idFuncionario: formValues.funcionario.id,
     };
 
     return api
-      .createCurso(submitValues)
+      .createDependente(submitValues)
       .then(() => alert("Cadastrado com sucesso!"))
       .catch((err: any) => alert(`Erro: ${err.message}`));
 
@@ -73,16 +72,13 @@ const DependenteForm = () => {
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <TextField name="nome" label="Nome" />
-            </Grid>
-            <Grid item xs={12}>
-              <NumericField name="codigo" label="Código" />
+              <TextField name="nomeDependente" label="Nome" />
             </Grid>
             <Grid item xs={12}>
               <AutocompleteField
                 name="funcionario"
                 label="Funcionário"
-                options={optionsFuncionario}
+                options={options}
               />
             </Grid>
             <Grid item xs={12}>

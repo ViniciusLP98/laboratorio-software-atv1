@@ -48,10 +48,10 @@ const FuncionarioForm = () => {
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <TextField name="nome" label="Nome" />
+              <TextField name="nomeFuncionario" label="Nome" />
             </Grid>
             <Grid item xs={12}>
-              <NumericField name="matricula" label="Matrícula" /> 
+              <NumericField name="matriculaFuncionario" label="Matrícula" /> 
             </Grid>
             <Grid item xs={12}>
               <DatePickerField name="dataNascimento" label="Data de Nascimento" />
