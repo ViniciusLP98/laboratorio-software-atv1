@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import DatePickerField from "../../components/DatePickerField";
 import NumericField from "../../components/NumericField";
 import TextField from "../../components/TextField";
+import api from "../../services/api";
 
 
 const initialValue = { nome: "", matricula: "", dataNascimento: "" }
@@ -24,6 +25,13 @@ const FuncionarioForm = () => {
 
     const handleSubmit = (formValues: any) => {
 
+      console.log(formValues)
+
+      return api
+      .createFuncionario(formValues)
+      .then(() => alert("Cadastrado com sucesso!"))
+      .catch((err: any) => alert(`Erro: ${err.message}`));
+
       // if (id == "new") return api.createFuncionario(formValues)
       //     .then(() => alert("Cadastrado com sucesso!"))
       //     .catch((err: any) => alert(`Erro: ${err.message}`))
@@ -37,7 +45,7 @@ const FuncionarioForm = () => {
       onSubmit={handleSubmit}
       initialValues={values}
       render={({ handleSubmit }) => (
-        <form>
+        <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField name="nome" label="Nome" />

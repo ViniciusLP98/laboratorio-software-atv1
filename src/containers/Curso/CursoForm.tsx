@@ -2,10 +2,9 @@ import { Button, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-final-form";
 import { useParams } from "react-router-dom";
-import DatePickerField from "../../components/DatePickerField";
 import NumericField from "../../components/NumericField";
 import TextField from "../../components/TextField";
-
+import api from "../../services/api";
 
 const initialValue = { nome: "", codigo: "", ano: "" }
 
@@ -14,7 +13,7 @@ const CursoForm = () => {
     const [values, setValues] = useState(initialValue);
     
     // useEffect(() => {
-    //     if (id != "new") {
+    //     if (id !== "new") {
     //         api.getCurso(id)
     //             .then((res: any) => {
     //                 setValues(res)
@@ -24,6 +23,9 @@ const CursoForm = () => {
 
     const handleSubmit = (formValues: any) => {
 
+      return api.createCurso(formValues)
+        .then(() => alert("Cadastrado com sucesso!"))
+        .catch((err: any) => alert(`Erro: ${err.message}`))
       // if (id == "new") return api.createCurso(formValues)
       //     .then(() => alert("Cadastrado com sucesso!"))
       //     .catch((err: any) => alert(`Erro: ${err.message}`))
@@ -37,7 +39,7 @@ const CursoForm = () => {
       onSubmit={handleSubmit}
       initialValues={values}
       render={({ handleSubmit }) => (
-        <form>
+        <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField name="nome" label="Nome" />

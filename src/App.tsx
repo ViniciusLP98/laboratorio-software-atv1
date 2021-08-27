@@ -7,6 +7,8 @@ import {
 import React from "react";
 import "./App.css";
 import FuncionarioForm from "./containers/Funcionario/FuncionarioForm";
+import DependenteForm from "./containers/Dependente/DependenteForm";
+import CursoForm from "./containers/Curso/CursoForm";
 
 const theme = createMuiTheme({
   palette: {
@@ -25,20 +27,20 @@ function App() {
       <MuiThemeProvider theme={theme}>
         <Router>
           <Switch>
-            <Route exact path="/funcionario">
+            <Route exact path="/funcionarios">
               <FuncionarioForm />
             </Route>
-            <Route path="/funcionario/:id"> </Route>
+            <Route path="/funcionarios/:id"> </Route>
 
-            <Route exact path="/dependente">
-              {" "}
+            <Route exact path="/dependentes">
+            <DependenteForm />
             </Route>
-            <Route path="/dependente/:id"></Route>
+            <Route path="/dependentes/:id"></Route>
 
-            <Route exact path="/curso">
-              {" "}
+            <Route exact path="/cursos">
+            <CursoForm />
             </Route>
-            <Route path="/curso/:id"> </Route>
+            <Route path="/cursos/:id"> </Route>
 
             <Route exact path="/home">
               Home!

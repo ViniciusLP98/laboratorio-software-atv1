@@ -6,18 +6,18 @@ import { Field } from 'react-final-form';
 function AutocompleteCore(props: any) {
   const { input, options } = props;
 
-  function getOption(value: string) {
+  function getOption(value: any) {
     return options.find((option: any) => option === value) || null;
   }
 
   return (
     <Autocomplete
       options={options}
-      value={getOption(input.value.id)}
+      value={getOption(input.value)}
       clearText="Limpar"
       openText="Abrir"
       closeText="Fechar"
-      getOptionLabel={(option: any) => option}
+      getOptionLabel={(option: any) => option.nome}
       onChange={(event: any, newValue: any) => input.onChange(newValue || null)}
       renderInput={(params) => <TextField {...params} name={props.name} label={props.label} />}
     />
