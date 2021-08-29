@@ -1,39 +1,40 @@
 import { Button, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-final-form";
-import { useParams } from "react-router-dom";
-import NumericField from "../../components/NumericField";
+import { useHistory, useParams } from "react-router-dom";
 import TextField from "../../components/TextField";
 import api from "../../services/api";
 
-const initialValue = { nome: "", codigo: "", ano: "" }
+const initialValue = { nomeCurso: "" };
 
 const CursoForm = () => {
-  const id = useParams();
-    const [values, setValues] = useState(initialValue);
-    
-    // useEffect(() => {
-    //     if (id !== "new") {
-    //         api.getCurso(id)
-    //             .then((res: any) => {
-    //                 setValues(res)
-    //             })
-    //     }
-    // }, [])
+  const { id } = useParams<{ id: any }>();
+  const history = useHistory();
+  const [values, setValues] = useState(initialValue);
 
-    const handleSubmit = (formValues: any) => {
+  useEffect(() => {
+    if (id !== "new") {
+      api.getCurso(id).then((res: any) => {
+        setValues(res.data);
+      });
+    }
+  }, []);
 
-      return api.createCurso(formValues)
-        .then(() => alert("Cadastrado com sucesso!"))
-        .catch((err: any) => alert(`Erro: ${err.message}`))
-      // if (id == "new") return api.createCurso(formValues)
-      //     .then(() => alert("Cadastrado com sucesso!"))
-      //     .catch((err: any) => alert(`Erro: ${err.message}`))
-
-      // else return api.updateCurso(formValues, id)
-      //     .then(() => alert("Salvo com sucesso!"))
-      //     .catch((err: any) => alert(`Erro: ${err.message}`))
-  }
+  const handleSubmit = (formValues: any) => {
+    if (id == "new")
+      return api
+        .createCurso(formValues)
+        .then(() => {
+          alert("Cadastrado com sucesso!");
+          history.push("/cursos");
+        })
+        .catch((err: any) => alert(`Erro: ${err.message}`));
+    else
+      return api
+        .updateCurso(formValues, id)
+        .then(() => alert("Salvo com sucesso!"))
+        .catch((err: any) => alert(`Erro: ${err.message}`));
+  };
   return (
     <Form
       onSubmit={handleSubmit}
@@ -47,7 +48,11 @@ const CursoForm = () => {
             <Grid item xs={12}>
               <Grid container justify="flex-end" spacing={2}>
                 <Grid item xs="auto">
-                  <Button variant="outlined" color="primary">
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={() => history.push("/cursos")}
+                  >
                     Cancelar
                   </Button>
                 </Grid>
