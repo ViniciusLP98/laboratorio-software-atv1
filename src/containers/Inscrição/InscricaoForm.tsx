@@ -2,33 +2,20 @@ import { Button, Grid } from "@material-ui/core";
 import React, { useEffect, useMemo, useState } from "react";
 import { Form } from "react-final-form";
 import { useHistory, useParams } from "react-router-dom";
-import AutocompleteField from "../../components/AutocompleteField";
+import CursoField from "../../components/CursoField";
+import FuncionarioField from "../../components/FuncionarioField";
 import api from "../../services/api";
 
 const initialValue = { funcionario: [], curso: [] };
 
-const DependenteForm = () => {
+const InscricaoForm = () => {
   const { id } = useParams<{ id: any }>();
   const history = useHistory();
   const [values, setValues] = useState(initialValue);
-
-  const loadFuncionarios = () => {
-    api.getFuncionarios().
-    then((res: any) => {
-      return res.data
-    } )
-  }
-
-  const loadCursos = () => {
-    api.getCursos().
-    then((res: any) => {
-      return res.data
-    } )
-  }
   
   useEffect(() => {
       if (id != "new") {
-          api.getDependente(id)
+          api.getInscricao(id)
               .then((res: any) => {
                   setValues(res)
               })
@@ -39,21 +26,22 @@ const DependenteForm = () => {
     const submitValues = {
       idFuncionario: formValues.funcionario.id,
       idCurso: formValues.curso.id,
+      anoFormacao: '2020'
     };
 
-    // if (id == "new")
-    //   return api
-    //     .createDependente(submitValues)
-    //     .then(() => {
-    //       alert("Cadastrado com sucesso!");
-    //       history.push("/inscricao-curso");
-    //     })
-    //     .catch((err: any) => alert(`Erro: ${err.message}`));
-    // else
-    //   return api
-    //     .updateDependente(submitValues, id)
-    //     .then(() => alert("Salvo com sucesso!"))
-    //     .catch((err: any) => alert(`Erro: ${err.message}`));
+    if (id == "new")
+      return api
+        .createInscricao(submitValues)
+        .then(() => {
+          alert("Cadastrado com sucesso!");
+          history.push("/inscricoes");
+        })
+        .catch((err: any) => alert(`Erro: ${err.message}`));
+    else
+      return api
+        .updateInscricao(submitValues, id)
+        .then(() => alert("Salvo com sucesso!"))
+        .catch((err: any) => alert(`Erro: ${err.message}`));
   };
   return (
     <Form
@@ -63,18 +51,16 @@ const DependenteForm = () => {
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-            <AutocompleteField
+            <FuncionarioField
                 name="funcionario"
                 label="Funcionário"
-                options={loadFuncionarios}
               />
             </Grid>
             <Grid item xs={12}>
               
-              <AutocompleteField
+              <CursoField
                 name="curso"
                 label="Curso"
-                options={loadCursos}
               />
             </Grid>
             <Grid item xs={12}>
@@ -102,4 +88,4 @@ const DependenteForm = () => {
   );
 };
 
-export default DependenteForm;
+export default InscricaoForm;

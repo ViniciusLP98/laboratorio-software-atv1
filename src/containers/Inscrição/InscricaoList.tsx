@@ -23,7 +23,7 @@ function InscriçãoList() {
   const [inscricoes, setInscricoes] = useState([]);
 
   useEffect(() => {
-    api.getInscricoes().then((res: any) => setInscricoes(res.data));
+    api.getInscricoes().then((res: any) => setInscricoes(res.data.dados));
   }, [inscricoes]);
 
   return (
@@ -75,7 +75,7 @@ function InscriçãoList() {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => history.push("/dependentes/new")}
+            onClick={() => history.push("/inscricoes/new")}
           >
             Adicionar Inscrição
           </Button>

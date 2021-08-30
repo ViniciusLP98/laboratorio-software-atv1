@@ -26,7 +26,7 @@ function DependenteList() {
 
   useEffect(() => {
       api.getDependentes()
-          .then((res: any) => setDependentes(res.data))
+          .then((res: any) => setDependentes(res.data.dados))
   }, [dependentes]);
 
   const filteredItems = useMemo(() => {

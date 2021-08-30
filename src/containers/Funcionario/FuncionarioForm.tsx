@@ -22,7 +22,7 @@ const FuncionarioForm = () => {
   useEffect(() => {
     if (id != "new") {
       api.getFuncionario(id).then((res: any) => {
-        setValues(res.data);
+        setValues(res.data.dados);
       });
     }
   }, []);

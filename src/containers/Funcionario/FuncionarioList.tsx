@@ -26,7 +26,8 @@ function FuncionarioList() {
 
   useEffect(() => {
       api.getFuncionarios()
-          .then((res: any) => setFuncionarios(res.data))
+          .then((res: any) => { console.log(res.data)
+            setFuncionarios(res.data.dados)})
   }, []);
 
   const filteredItems = useMemo(() => {

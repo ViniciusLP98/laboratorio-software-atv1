@@ -4,7 +4,7 @@ import { Form } from "react-final-form";
 import { useHistory, useParams } from "react-router-dom";
 import AutocompleteField from "../../components/AutocompleteField";
 import DatePickerField from "../../components/DatePickerField";
-import NumericField from "../../components/NumericField";
+import FuncionarioField from "../../components/FuncionarioField";
 import TextField from "../../components/TextField";
 import api from "../../services/api";
 
@@ -14,17 +14,11 @@ const DependenteForm = () => {
   const { id } = useParams<{ id: any }>();
   const history = useHistory();
   const [values, setValues] = useState(initialValue);
-
-  const loadFuncionarios = () => {
-    api.getFuncionarios().then((res: any) => {
-      return res.data;
-    });
-  };
-
+ 
   useEffect(() => {
     if (id != "new") {
       api.getDependente(id).then((res: any) => {
-        setValues(res);
+        setValues(res.data.dados);
       });
     }
   }, []);
@@ -60,10 +54,9 @@ const DependenteForm = () => {
               <TextField name="nomeDependente" label="Nome" />
             </Grid>
             <Grid item xs={12}>
-              <AutocompleteField
+              <FuncionarioField
                 name="funcionario"
-                label="Funcionário"
-                options={loadFuncionarios}
+                label="Funcionário"                
               />
             </Grid>
             <Grid item xs={12}>

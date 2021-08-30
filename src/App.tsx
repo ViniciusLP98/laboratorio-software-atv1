@@ -8,6 +8,8 @@ import CursoForm from "./containers/Curso/CursoForm";
 import FuncionarioList from "./containers/Funcionario/FuncionarioList";
 import DependenteList from "./containers/Dependente/DependenteList";
 import CursoList from "./containers/Curso/CursoList";
+import InscricaoList from "./containers/Inscrição/InscricaoList";
+import InscricaoForm from "./containers/Inscrição/InscricaoForm";
 import NavigationBar from "./components/NavigationBar";
 
 const theme = createMuiTheme({
@@ -45,6 +47,12 @@ function App() {
               </Route>
               <Route path="/cursos/:id">
                 <CursoForm />
+              </Route>
+              <Route exact path="/inscricoes">
+                <InscricaoList />
+              </Route>
+              <Route path="/inscricoes/:id">
+                <InscricaoForm />
               </Route>
               <Route exact path="/home">
                 Home!

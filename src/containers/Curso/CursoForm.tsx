@@ -15,7 +15,7 @@ const CursoForm = () => {
   useEffect(() => {
     if (id !== "new") {
       api.getCurso(id).then((res: any) => {
-        setValues(res.data);
+        setValues(res.data.dados);
       });
     }
   }, []);

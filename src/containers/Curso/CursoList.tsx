@@ -25,7 +25,7 @@ function CursoList() {
   const [cursos, setCursos] = useState([]);
 
   useEffect(() => {
-    api.getCursos().then((res: any) => setCursos(res.data));
+    api.getCursos().then((res: any) => setCursos(res.data.dados));
   }, [cursos]);
 
   const filteredItems = useMemo(() => {
