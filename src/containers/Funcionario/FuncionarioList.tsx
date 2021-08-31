@@ -28,7 +28,7 @@ function FuncionarioList() {
       api.getFuncionarios()
           .then((res: any) => { console.log(res.data)
             setFuncionarios(res.data.dados)})
-  }, []);
+  }, [funcionarios]);
 
   const filteredItems = useMemo(() => {
     if (!filterByName || !funcionarios) {

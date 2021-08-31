@@ -30,7 +30,7 @@ const FuncionarioForm = () => {
     const submitValues = {
       nomeFuncionario: formValues.nomeFuncionario,
       matriculaFuncionario: formValues.matriculaFuncionario,
-      dataNascimento: dayjs(formValues.dataNascimento).format('DD/MM/YYYY')
+      dataNascimento: dayjs(formValues.dataNascimento).format('YYYY-MM-DD')
     };
     if (id == "new")
       return api
