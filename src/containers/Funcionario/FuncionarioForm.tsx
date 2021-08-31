@@ -32,6 +32,7 @@ const FuncionarioForm = () => {
       matriculaFuncionario: formValues.matriculaFuncionario,
       dataNascimento: dayjs(formValues.dataNascimento).format('YYYY-MM-DD')
     };
+
     if (id == "new")
       return api
         .createFuncionario(submitValues)
@@ -43,7 +44,10 @@ const FuncionarioForm = () => {
     else
       return api
         .updateFuncionario(submitValues, id)
-        .then(() => alert("Salvo com sucesso!"))
+        .then(() => {
+          alert("Salvo com sucesso!")
+          history.push("/funcionarios");
+        })
         .catch((err: any) => alert(`Erro: ${err.message}`));
   };
   return (

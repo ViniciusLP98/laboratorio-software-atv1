@@ -40,7 +40,10 @@ const InscricaoForm = () => {
     else
       return api
         .updateInscricao(submitValues, id)
-        .then(() => alert("Salvo com sucesso!"))
+        .then(() => {
+          alert("Salvo com sucesso!");
+          history.push("/funcionarios");
+        })
         .catch((err: any) => alert(`Erro: ${err.message}`));
   };
   return (

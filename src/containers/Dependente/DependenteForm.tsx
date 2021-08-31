@@ -38,7 +38,10 @@ const DependenteForm = () => {
     else
       return api
         .updateDependente(submitValues, id)
-        .then(() => alert("Salvo com sucesso!"))
+        .then(() => {
+          alert("Salvo com sucesso!");
+          history.push("/dependentes");
+        })
         .catch((err: any) => alert(`Erro: ${err.message}`));
   };
   return (

@@ -17,6 +17,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import api from "../../services/api";
 import { Link, useHistory } from "react-router-dom";
+import dayjs from "dayjs";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function FuncionarioList() {
@@ -86,7 +87,7 @@ function FuncionarioList() {
                         <TableCell>
                           {funcionario.matriculaFuncionario}
                         </TableCell>
-                        <TableCell>{funcionario.dataNascimento}</TableCell>
+                        <TableCell>{dayjs(funcionario.dataNascimento).format('DD/MM/YYYY')}</TableCell>
                         <TableCell>
                           <Button>
                             <Link

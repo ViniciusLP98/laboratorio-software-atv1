@@ -21,15 +21,19 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
     },
     appBar: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
+      //width: `calc(100% - ${drawerWidth}px)`,
+      width: '100%',
+      position: 'fixed',
+      zIndex: theme.zIndex.drawer + 1,
+      backgroundColor: "#192e70"
     },
     drawer: {
       width: drawerWidth,
-      flexShrink: 0,
+      flexShrink: 0
     },
     drawerPaper: {
-      width: drawerWidth
+      width: drawerWidth,
+      backgroundColor: "#20409c"
     },
     // necessary for content to be below app bar
     toolbar: theme.mixins.toolbar,
@@ -85,7 +89,7 @@ function NavigationBar({children}: NavigationBarProps) {
         }}
         anchor="left"
       >
-          <Typography variant="h5">Opções</Typography>
+      <Toolbar />
         <List>
           {menuItems.map((item) => (
             <ListItem
@@ -93,7 +97,7 @@ function NavigationBar({children}: NavigationBarProps) {
               key={item.text}
               onClick={() => history.push(item.path)}
             >
-              <ListItemText primary={item.text} />
+              <ListItemText primary={item.text} style={{color: '#fff'}}/>
             </ListItem>
           ))}
         </List>

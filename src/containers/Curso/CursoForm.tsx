@@ -32,7 +32,10 @@ const CursoForm = () => {
     else
       return api
         .updateCurso(formValues, id)
-        .then(() => alert("Salvo com sucesso!"))
+        .then(() => {
+          alert("Salvo com sucesso!");
+          history.push("/cursos");
+        })
         .catch((err: any) => alert(`Erro: ${err.message}`));
   };
   return (
