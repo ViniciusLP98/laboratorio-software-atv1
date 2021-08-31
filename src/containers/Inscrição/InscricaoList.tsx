@@ -28,13 +28,13 @@ function InscriçãoList() {
     api.getInscricoes().then((res: any) => setInscricoes(res.data.dados));
   }, [inscricoes]);
 
-  useEffect(() => {
-    api.getFuncionarios().then((res: any) => setFuncionarios(res.data.dados));
-  }, [funcionarios]);
+  // useEffect(() => {
+  //   api.getFuncionarios().then((res: any) => setFuncionarios(res.data.dados));
+  // }, [funcionarios]);
 
-  useEffect(() => {
-    api.getCursos().then((res: any) => setCursos(res.data.dados));
-  }, [cursos]);
+  // useEffect(() => {
+  //   api.getCursos().then((res: any) => setCursos(res.data.dados));
+  // }, [cursos]);
 
   return (
     <Box p={2}>
@@ -63,9 +63,9 @@ function InscriçãoList() {
                       <TableRow key={inscricao.id}>
                         <TableCell>{inscricao.id}</TableCell>
                         <TableCell>
-                          {funcionarios[inscricao.idFuncionario]}
+                          {inscricao.idFuncionario}
                         </TableCell>
-                        <TableCell>{cursos[inscricao.idCurso]}</TableCell>
+                        <TableCell>{inscricao.idCurso}</TableCell>
                         <TableCell></TableCell>)
                         <TableCell>
                           <Button
