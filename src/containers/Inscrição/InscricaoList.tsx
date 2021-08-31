@@ -21,10 +21,20 @@ import { Link, useHistory } from "react-router-dom";
 function InscriçãoList() {
   const history = useHistory();
   const [inscricoes, setInscricoes] = useState([]);
+  const [funcionarios, setFuncionarios] = useState([]);
+  const [cursos, setCursos] = useState([]);
 
   useEffect(() => {
     api.getInscricoes().then((res: any) => setInscricoes(res.data.dados));
   }, [inscricoes]);
+
+  useEffect(() => {
+    api.getFuncionarios().then((res: any) => setFuncionarios(res.data.dados));
+  }, [funcionarios]);
+
+  useEffect(() => {
+    api.getCursos().then((res: any) => setCursos(res.data.dados));
+  }, [cursos]);
 
   return (
     <>
@@ -52,9 +62,9 @@ function InscriçãoList() {
                     {inscricoes.map((inscricao: any) => (
                       <TableRow key={inscricao.id}>
                         <TableCell>{inscricao.id}</TableCell>
-                        <TableCell>{inscricao.idFuncionario}</TableCell>
-                        <TableCell>{inscricao.idCurso}</TableCell>
-                        <TableCell></TableCell>
+                        <TableCell>{funcionarios[inscricao.idFuncionario]}</TableCell>
+                        <TableCell>{cursos[inscricao.idCurso]}</TableCell>
+                        <TableCell></TableCell>)
                         <TableCell>
                           <Button
                             onClick={() => api.deleteFuncionario(inscricao.id)}

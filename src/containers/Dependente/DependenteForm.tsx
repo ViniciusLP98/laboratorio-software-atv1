@@ -14,7 +14,7 @@ const DependenteForm = () => {
   const { id } = useParams<{ id: any }>();
   const history = useHistory();
   const [values, setValues] = useState(initialValue);
- 
+
   useEffect(() => {
     if (id != "new") {
       api.getDependente(id).then((res: any) => {
@@ -54,10 +54,15 @@ const DependenteForm = () => {
               <TextField name="nomeDependente" label="Nome" />
             </Grid>
             <Grid item xs={12}>
-              <FuncionarioField
-                name="funcionario"
-                label="Funcionário"                
-              />
+              {id !== "new" ? (
+                <TextField
+                  name="funcionario"
+                  label="Funcionário"
+                  InputProps={{ readOnly: true }}
+                />
+              ) : (
+                <FuncionarioField name="funcionario" label="Funcionário" />
+              )}
             </Grid>
             <Grid item xs={12}>
               <Grid container justify="flex-end" spacing={2}>

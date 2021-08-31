@@ -72,6 +72,11 @@ function NavigationBar({children}: NavigationBarProps) {
 
   return (
     <div className={classes.root}>
+      <AppBar color="primary" elevation={0} className={classes.appBar}>
+        <Toolbar>
+          <Typography>Gerenciamento de Funcionários</Typography>
+        </Toolbar>
+      </AppBar>
       <Drawer
         className={classes.drawer}
         variant="permanent"
@@ -95,6 +100,7 @@ function NavigationBar({children}: NavigationBarProps) {
       </Drawer>
 
       <div className={classes.page}>
+        <div className={classes.toolbar}></div>
         {children}
       </div>
 
