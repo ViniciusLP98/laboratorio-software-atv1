@@ -11,7 +11,7 @@ import {
   TableBody,
   Button,
   Typography,
-  TextField
+  TextField,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -39,8 +39,14 @@ function CursoList() {
   }, [filterByName, cursos]);
 
   return (
-    <>
+    <Box p={2}>
       <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Typography variant="h5">Cursos</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography align="left">Pesquise por nome: </Typography>
+        </Grid>
         <Grid item xs={12}>
           <TextField
             fullWidth
@@ -109,7 +115,7 @@ function CursoList() {
           </Button>
         </Grid>
       </Grid>
-    </>
+    </Box>
   );
 }
 

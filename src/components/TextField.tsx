@@ -5,6 +5,7 @@ function TextFieldCore(props: any) {
   const input = props.input;
   const label = props.label;
   const meta = props.meta;
+  const disabled = props.disabled;
 
   let error = "";
 
@@ -19,6 +20,7 @@ function TextFieldCore(props: any) {
         fullWidth
         label={label}
         value={input.value}
+        disabled={disabled}
         onChange={(event) => input.onChange(event.target.value)}
       />
       <Typography color="error" variant="subtitle2">
@@ -30,7 +32,7 @@ function TextFieldCore(props: any) {
 
 function TextField(props: any) {
   return (
-    <Field name={props.name} label={props.label} component={TextFieldCore} />
+    <Field name={props.name} label={props.label} disabled={props.disabled} component={TextFieldCore} />
   );
 }
 

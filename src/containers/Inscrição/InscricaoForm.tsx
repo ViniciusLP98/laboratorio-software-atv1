@@ -1,4 +1,4 @@
-import { Button, Grid } from "@material-ui/core";
+import { Box, Button, Grid } from "@material-ui/core";
 import React, { useEffect, useMemo, useState } from "react";
 import { Form } from "react-final-form";
 import { useHistory, useParams } from "react-router-dom";
@@ -44,46 +44,45 @@ const InscricaoForm = () => {
         .catch((err: any) => alert(`Erro: ${err.message}`));
   };
   return (
-    <Form
-      onSubmit={handleSubmit}
-      initialValues={values}
-      render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <FuncionarioField name="funcionario" label="Funcionário" />
-            </Grid>
-            <Grid item xs={12}>
-              <CursoField name="curso" label="Curso" />
-            </Grid>
-            <Grid item xs={12}>
-              <YearPickerField
-                name="anoFormacao"
-                label="Ano de Formação"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Grid container justify="flex-end" spacing={2}>
-                <Grid item xs="auto">
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={() => history.push("/inscricoes")}
-                  >
-                    Cancelar
-                  </Button>
-                </Grid>
-                <Grid item xs="auto">
-                  <Button type="submit" variant="contained" color="primary">
-                    Salvar
-                  </Button>
+    <Box p={2}>
+      <Form
+        onSubmit={handleSubmit}
+        initialValues={values}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <FuncionarioField name="funcionario" label="Funcionário" />
+              </Grid>
+              <Grid item xs={12}>
+                <CursoField name="curso" label="Curso" />
+              </Grid>
+              <Grid item xs={12}>
+                <YearPickerField name="anoFormacao" label="Ano de Formação" />
+              </Grid>
+              <Grid item xs={12}>
+                <Grid container justify="flex-end" spacing={2}>
+                  <Grid item xs="auto">
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      onClick={() => history.push("/inscricoes")}
+                    >
+                      Cancelar
+                    </Button>
+                  </Grid>
+                  <Grid item xs="auto">
+                    <Button type="submit" variant="contained" color="primary">
+                      Salvar
+                    </Button>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </form>
-      )}
-    />
+          </form>
+        )}
+      />
+    </Box>
   );
 };
 

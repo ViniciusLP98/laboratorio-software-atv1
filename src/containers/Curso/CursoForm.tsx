@@ -1,4 +1,4 @@
-import { Button, Grid } from "@material-ui/core";
+import { Box, Button, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Form } from "react-final-form";
 import { useHistory, useParams } from "react-router-dom";
@@ -36,37 +36,39 @@ const CursoForm = () => {
         .catch((err: any) => alert(`Erro: ${err.message}`));
   };
   return (
-    <Form
-      onSubmit={handleSubmit}
-      initialValues={values}
-      render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField name="nomeCurso" label="Nome" />
-            </Grid>
-            <Grid item xs={12}>
-              <Grid container justify="flex-end" spacing={2}>
-                <Grid item xs="auto">
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={() => history.push("/cursos")}
-                  >
-                    Cancelar
-                  </Button>
-                </Grid>
-                <Grid item xs="auto">
-                  <Button type="submit" variant="contained" color="primary">
-                    Salvar
-                  </Button>
+    <Box p={2}>
+      <Form
+        onSubmit={handleSubmit}
+        initialValues={values}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField name="nomeCurso" label="Nome" />
+              </Grid>
+              <Grid item xs={12}>
+                <Grid container justify="flex-end" spacing={2}>
+                  <Grid item xs="auto">
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      onClick={() => history.push("/cursos")}
+                    >
+                      Cancelar
+                    </Button>
+                  </Grid>
+                  <Grid item xs="auto">
+                    <Button type="submit" variant="contained" color="primary">
+                      Salvar
+                    </Button>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </form>
-      )}
-    />
+          </form>
+        )}
+      />
+    </Box>
   );
 };
 

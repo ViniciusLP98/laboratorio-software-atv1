@@ -37,7 +37,7 @@ function InscriçãoList() {
   }, [cursos]);
 
   return (
-    <>
+    <Box p={2}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Paper elevation={0} style={{ maxHeight: "100%", overflow: "auto" }}>
@@ -62,7 +62,9 @@ function InscriçãoList() {
                     {inscricoes.map((inscricao: any) => (
                       <TableRow key={inscricao.id}>
                         <TableCell>{inscricao.id}</TableCell>
-                        <TableCell>{funcionarios[inscricao.idFuncionario]}</TableCell>
+                        <TableCell>
+                          {funcionarios[inscricao.idFuncionario]}
+                        </TableCell>
                         <TableCell>{cursos[inscricao.idCurso]}</TableCell>
                         <TableCell></TableCell>)
                         <TableCell>
@@ -91,7 +93,7 @@ function InscriçãoList() {
           </Button>
         </Grid>
       </Grid>
-    </>
+    </Box>
   );
 }
 

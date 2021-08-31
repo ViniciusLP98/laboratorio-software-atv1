@@ -39,8 +39,14 @@ function FuncionarioList() {
   }, [filterByName, funcionarios]);
 
   return (
-    <>
+    <Box p={2}>
       <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Typography variant="h5">Funcionários</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography align="left">Pesquise por nome: </Typography>
+        </Grid>
         <Grid item xs={12}>
           <TextField 
             fullWidth
@@ -123,7 +129,7 @@ function FuncionarioList() {
           </Button>
         </Grid>
       </Grid>
-    </>
+    </Box>
   );
 }
 

@@ -1,9 +1,7 @@
-import { Button, Grid } from "@material-ui/core";
+import { Box, Button, Grid } from "@material-ui/core";
 import React, { useEffect, useMemo, useState } from "react";
 import { Form } from "react-final-form";
 import { useHistory, useParams } from "react-router-dom";
-import AutocompleteField from "../../components/AutocompleteField";
-import DatePickerField from "../../components/DatePickerField";
 import FuncionarioField from "../../components/FuncionarioField";
 import TextField from "../../components/TextField";
 import api from "../../services/api";
@@ -44,48 +42,50 @@ const DependenteForm = () => {
         .catch((err: any) => alert(`Erro: ${err.message}`));
   };
   return (
-    <Form
-      onSubmit={handleSubmit}
-      initialValues={values}
-      render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField name="nomeDependente" label="Nome" />
-            </Grid>
-            <Grid item xs={12}>
-              {id !== "new" ? (
-                <TextField
-                  name="funcionario"
-                  label="Funcionário"
-                  InputProps={{ readOnly: true }}
-                />
-              ) : (
-                <FuncionarioField name="funcionario" label="Funcionário" />
-              )}
-            </Grid>
-            <Grid item xs={12}>
-              <Grid container justify="flex-end" spacing={2}>
-                <Grid item xs="auto">
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={() => history.push("/dependentes")}
-                  >
-                    Cancelar
-                  </Button>
-                </Grid>
-                <Grid item xs="auto">
-                  <Button type="submit" variant="contained" color="primary">
-                    Salvar
-                  </Button>
+    <Box p={2}>
+      <Form
+        onSubmit={handleSubmit}
+        initialValues={values}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField name="nomeDependente" label="Nome" />
+              </Grid>
+              <Grid item xs={12}>
+                {id !== "new" ? (
+                  <TextField
+                    disabled
+                    name="funcionario"
+                    label="Funcionário"
+                  />
+                ) : (
+                  <FuncionarioField name="funcionario" label="Funcionário" />
+                )}
+              </Grid>
+              <Grid item xs={12}>
+                <Grid container justify="flex-end" spacing={2}>
+                  <Grid item xs="auto">
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      onClick={() => history.push("/dependentes")}
+                    >
+                      Cancelar
+                    </Button>
+                  </Grid>
+                  <Grid item xs="auto">
+                    <Button type="submit" variant="contained" color="primary">
+                      Salvar
+                    </Button>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </form>
-      )}
-    />
+          </form>
+        )}
+      />
+    </Box>
   );
 };
 

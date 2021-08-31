@@ -11,7 +11,7 @@ import {
   TableBody,
   Button,
   Typography,
-  TextField
+  TextField,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -25,8 +25,7 @@ function DependenteList() {
   const [dependentes, setDependentes] = useState([]);
 
   useEffect(() => {
-      api.getDependentes()
-          .then((res: any) => setDependentes(res.data.dados))
+    api.getDependentes().then((res: any) => setDependentes(res.data.dados));
   }, [dependentes]);
 
   const filteredItems = useMemo(() => {
@@ -34,19 +33,27 @@ function DependenteList() {
       return dependentes;
     }
 
-    return dependentes.filter((dependente: any) => dependente.nomeDependente.includes(filterByName));
+    return dependentes.filter((dependente: any) =>
+      dependente.nomeDependente.includes(filterByName)
+    );
   }, [filterByName, dependentes]);
 
   return (
-    <>
+    <Box p={2}>
       <Grid container spacing={3}>
-      <Grid item xs={12}>
-          <TextField 
+        <Grid item xs={12}>
+          <Typography variant="h5">Dependentes</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography align="left">Pesquise por nome: </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
             fullWidth
             name="name"
             label="Nome"
             onChange={(event) => setFilterByName(event.target.value)}
-            />
+          />
         </Grid>
         <Grid item xs={12}>
           <Paper elevation={0} style={{ maxHeight: "100%", overflow: "auto" }}>
@@ -114,7 +121,7 @@ function DependenteList() {
           </Button>
         </Grid>
       </Grid>
-    </>
+    </Box>
   );
 }
 
