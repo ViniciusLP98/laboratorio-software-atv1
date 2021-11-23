@@ -7,11 +7,14 @@ import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import { useHistory } from "react-router-dom";
+import IconButton from "@material-ui/core/IconButton";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import MenuIcon from "@material-ui/icons/Menu";
+import { Link, useHistory } from "react-router-dom";
 
 type NavigationBarProps = {
-    children: React.ReactNode;
-  };
+  children: React.ReactNode;
+};
 
 const drawerWidth = 200;
 
@@ -22,18 +25,18 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     appBar: {
       //width: `calc(100% - ${drawerWidth}px)`,
-      width: '100%',
-      position: 'fixed',
+      width: "100%",
+      position: "fixed",
       zIndex: theme.zIndex.drawer + 1,
-      backgroundColor: "#192e70"
+      backgroundColor: "#478bc9",
     },
     drawer: {
       width: drawerWidth,
-      flexShrink: 0
+      flexShrink: 0,
     },
     drawerPaper: {
       width: drawerWidth,
-      backgroundColor: "#20409c"
+      backgroundColor: "#478bc9",
     },
     // necessary for content to be below app bar
     toolbar: theme.mixins.toolbar,
@@ -43,14 +46,20 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(3),
     },
     page: {
-        width: '100%'
-    }
+      width: "100%",
+    },
   })
 );
 
-function NavigationBar({children}: NavigationBarProps) {
+function NavigationBar({ children }: NavigationBarProps) {
   const classes = useStyles();
   const history = useHistory();
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(!open);
+  };
+
   const menuItems = [
     {
       name: "funcionarios",
@@ -78,18 +87,31 @@ function NavigationBar({children}: NavigationBarProps) {
     <div className={classes.root}>
       <AppBar color="primary" elevation={0} className={classes.appBar}>
         <Toolbar>
-          <Typography>Gerenciamento de Funcionários</Typography>
+          <IconButton onClick={handleDrawerOpen} edge="start">
+            {" "}
+            <MenuIcon />{" "}
+          </IconButton>
+          <Link
+            to={"/home"}
+            style={{
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            Sistema de Gerenciamento
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer
         className={classes.drawer}
-        variant="permanent"
+        variant="persistent"
         classes={{
           paper: classes.drawerPaper,
         }}
         anchor="left"
+        open={open}
       >
-      <Toolbar />
+        <Toolbar />
         <List>
           {menuItems.map((item) => (
             <ListItem
@@ -97,7 +119,7 @@ function NavigationBar({children}: NavigationBarProps) {
               key={item.text}
               onClick={() => history.push(item.path)}
             >
-              <ListItemText primary={item.text} style={{color: '#fff'}}/>
+              <ListItemText primary={item.text} style={{ color: "#fff" }} />
             </ListItem>
           ))}
         </List>
@@ -107,7 +129,6 @@ function NavigationBar({children}: NavigationBarProps) {
         <div className={classes.toolbar}></div>
         {children}
       </div>
-
     </div>
   );
 }

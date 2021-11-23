@@ -1,23 +1,44 @@
-import { Box, Button, Grid } from "@material-ui/core";
-import React, { useEffect, useMemo, useState } from "react";
+import {
+  Box,
+  Button,
+  Container,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Grid,
+  Typography,
+} from "@material-ui/core";
+import React, { useEffect, useState } from "react";
 import { Form } from "react-final-form";
 import { useHistory, useParams } from "react-router-dom";
+import FuncionarioField from "../../components/FuncionarioField";
 import CursoField from "../../components/CursoField";
 import YearPickerField from "../../components/YearPickerField";
-import FuncionarioField from "../../components/FuncionarioField";
 import api from "../../services/api";
+import dayjs from "dayjs";
 
-const initialValue = { funcionario: [], curso: [], anoFormacao: "" };
+const initialValue = {
+  anoFormacao: dayjs().format('YYYY')
+};
 
-const InscricaoForm = () => {
+const InscricaoForm = () => { 
   const { id } = useParams<{ id: any }>();
   const history = useHistory();
   const [values, setValues] = useState(initialValue);
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     if (id != "new") {
       api.getInscricao(id).then((res: any) => {
-        setValues(res);
+        setValues(res.data.dados);
       });
     }
   }, []);
@@ -29,40 +50,70 @@ const InscricaoForm = () => {
       anoFormacao: formValues.anoFormacao,
     };
 
-    if (id == "new")
-      return api
+    return api
         .createInscricao(submitValues)
-        .then(() => {
-          alert("Cadastrado com sucesso!");
-          history.push("/inscricoes");
+        .then((res: any) => {
+          if(res.ok){
+            alert("Cadastrado com sucesso!");
+            history.push("/inscricoes");
+          }
+          else{
+            alert("Houve um problema com o cadastro! Tente novamente.");
+          }
+          
         })
-        .catch((err: any) => alert(`Erro: ${err.message}`));
-    else
-      return api
-        .updateInscricao(submitValues, id)
-        .then(() => {
-          alert("Salvo com sucesso!");
-          history.push("/funcionarios");
-        })
-        .catch((err: any) => alert(`Erro: ${err.message}`));
   };
   return (
+    <Container>
     <Box p={2}>
+      <Box pb={3}>
+          <Typography align="left" variant="h5">
+            Formulário de Inscrição
+          </Typography>
+        </Box>
       <Form
         onSubmit={handleSubmit}
         initialValues={values}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
+            <Grid container alignItems="flex-end" spacing={2}>
+              <Grid item xs={2}>
+                <Typography>Funcionário:</Typography>
+              </Grid>
+              <Grid item xs={10}>
                 <FuncionarioField name="funcionario" label="Funcionário" />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={2}>
+                <Typography>Curso:</Typography>
+              </Grid>
+              <Grid item xs={10}>
                 <CursoField name="curso" label="Curso" />
               </Grid>
-              <Grid item xs={12}>
-                <YearPickerField name="anoFormacao" label="Ano de Formação" />
+              <Grid item xs={2}>
+                <Typography>Ano de Formação:</Typography>
               </Grid>
+              <Grid item xs="auto">
+                <YearPickerField
+                  name="anoFormacao"
+                  label="Ano de Formação"
+                />
+              </Grid>
+
+              {id !== "new" ? (
+                <Grid item xs={12}>
+                  <Grid container justify="center">
+                    <Grid item xs>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        onClick={handleClickOpen}
+                      >
+                        Excluir Inscrição
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              ) : null}
               <Grid item xs={12}>
                 <Grid container justify="flex-end" spacing={2}>
                   <Grid item xs="auto">
@@ -86,6 +137,7 @@ const InscricaoForm = () => {
         )}
       />
     </Box>
+    </Container>
   );
 };
 

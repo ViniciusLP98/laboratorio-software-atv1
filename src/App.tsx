@@ -8,6 +8,8 @@ import CursoForm from "./containers/Curso/CursoForm";
 import FuncionarioList from "./containers/Funcionario/FuncionarioList";
 import DependenteList from "./containers/Dependente/DependenteList";
 import CursoList from "./containers/Curso/CursoList";
+import CursosFuncionarioList from "./containers/CursosFuncionarioList";
+import DependentesFuncionarioList from "./containers/DependentesFuncionarioList";
 import InscricaoList from "./containers/Inscrição/InscricaoList";
 import InscricaoForm from "./containers/Inscrição/InscricaoForm";
 import NavigationBar from "./components/NavigationBar";
@@ -33,8 +35,14 @@ function App() {
               <Route exact path="/funcionarios">
                 <FuncionarioList />
               </Route>
-              <Route path="/funcionarios/:id">
+              <Route exact path="/funcionarios/:id">
                 <FuncionarioForm />
+              </Route>
+              <Route exact path="/funcionarios/cursos/:id">
+                <CursosFuncionarioList />
+              </Route>
+              <Route exact path="/funcionarios/dependentes/:id">
+                <DependentesFuncionarioList />
               </Route>
               <Route exact path="/dependentes">
                 <DependenteList />

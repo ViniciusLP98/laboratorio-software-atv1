@@ -31,6 +31,9 @@ const api = {
     deleteDependente: (dependenteId: any) => restApi.delete(`/dependentes/${dependenteId}`),
     deleteCurso: (cursoId: any) => restApi.delete(`/cursos/${cursoId}`),
     deleteInscricao: (inscricaoId: any) => restApi.delete(`/cursosFuncionario/${inscricaoId}`),
+
+    getCursosFuncionario: (funcionarioId: number) => restApi.get(`/funcionarios/cursos/${funcionarioId}`),
+    getDependentesFuncionario: (funcionarioId: number) => restApi.get(`/funcionarios/dependentes/${funcionarioId}`),
 };
 
 export default api;

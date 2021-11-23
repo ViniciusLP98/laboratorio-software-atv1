@@ -14,7 +14,7 @@ function YearPickerCore(props: any) {
         views={['year']}
         readOnly={readOnly}
         InputProps={{ disableUnderline }}
-        format="DD/MM/YYYY"
+        format="YYYY"
         label={label}
         value={input.value}
         onChange={(event) => {
